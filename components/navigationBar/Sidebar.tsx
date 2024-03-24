@@ -4,43 +4,47 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { TbCurrencyTaka } from "react-icons/tb";
 import Icon from "../Icon";
-import { Transition } from "@headlessui/react";
 
 const Sidebar = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const scheme = "Dark";
   return (
     <div
-      className={`bg-slate-900 h-screen py-4 flex justify-between flex-col ${
-        toggleSidebar ? "w-[233px] ps-4" : "w-[58px] items-center"
+      className={`bg-slate-900 h-screen py-4 flex justify-between flex-col transition-all ease-in duration-300 ${
+        toggleSidebar ? "w-[249px] ps-4" : "w-[58px] items-center"
       }`}
     >
       <div>
         <button
-          className={`mb-6 p-1 flex justify-start items-center  bg-[#2463EA] text-white hover:bg-[#1C4ED9] cursor-pointer ${
-            toggleSidebar
-              ? "h-[46px] w-[217px] rounded-s justify-start "
-              : "h-[38px] w-[40px] rounded justify-center "
-          }`}
+          className={`mb-6 p-1 flex justify-start items-center  bg-[#2463EA] text-white hover:bg-[#1C4ED9] cursor-pointer transition-all ease-in duration-300
+           ${
+             toggleSidebar
+               ? "h-[46px] w-[233px] rounded-s justify-start "
+               : "h-[38px] w-[40px] rounded ps-2"
+           }`}
           onClick={() => setToggleSidebar((prev) => !prev)}
         >
           <TbCurrencyTaka
             className={`h-full w-auto ${toggleSidebar ? "p-1 ps-2" : ""}`}
           />
           <span
-            className={`${toggleSidebar ? "font-semibold text-xl" : "hidden"}`}
+            className={`${
+              toggleSidebar
+                ? "font-semibold text-xl whitespace-nowrap"
+                : "hidden"
+            }`}
           >
             Track Taka
           </span>
         </button>
-        <div className="pt-4">
+        <div className="pt-4 transition-all ease-in duration-300">
           {sidebarLinks.navLinks.map((navLink, index) => (
             <ul
               key={index}
-              className={`flex bg-[#1E293B] mb-[0.6rem] text-white font-medium ${
+              className={`flex justify-start bg-[#1E293B] mb-[0.6rem] text-white font-medium transition-all ease-in duration-300 ${
                 toggleSidebar
-                  ? "h-[41px] w-[217px] rounded-s justify-start items-center py-[0.6rem] ps-3"
-                  : "h-[43px] w-[40px] rounded justify-center py-[0.6rem]"
+                  ? "h-[41px] w-[233px] rounded-s items-center py-[0.6rem] ps-3"
+                  : "h-[43px] w-[40px] rounded py-[0.6rem] ps-2"
               }`}
             >
               <Icon
@@ -51,7 +55,11 @@ const Sidebar = () => {
               />
 
               <li
-                className={`${toggleSidebar ? "flex ps-[0.6rem]" : "hidden"}`}
+                className={`${
+                  toggleSidebar
+                    ? "flex ps-[0.6rem] whitespace-nowrap"
+                    : "hidden"
+                }`}
               >
                 {navLink.title}
               </li>
@@ -61,10 +69,10 @@ const Sidebar = () => {
       </div>
 
       <div
-        className={`flex bg-[#1E293B]  text-white font-medium ${
+        className={`flex justify-start bg-[#1E293B]  text-white font-medium transition-all ease-in duration-300  ${
           toggleSidebar
-            ? "h-[41px] w-[217px] rounded-s justify-start items-center ps-3"
-            : "h-[43px] w-[40px] rounded justify-center items-center"
+            ? "h-[41px] w-[233px] rounded-s items-center ps-3"
+            : "h-[43px] w-[40px] rounded items-center ps-2"
         }`}
       >
         {scheme === "Dark" ? (
@@ -76,7 +84,9 @@ const Sidebar = () => {
             />
             <span
               className={`${
-                toggleSidebar ? "font-normal ps-[0.7rem] " : "hidden"
+                toggleSidebar
+                  ? "font-normal ps-[0.7rem] whitespace-nowrap "
+                  : "hidden"
               }`}
             >
               {sidebarLinks.themes.light.title}
@@ -91,7 +101,9 @@ const Sidebar = () => {
             />
             <span
               className={`${
-                toggleSidebar ? "font-normal ps-[0.7rem] " : "hidden"
+                toggleSidebar
+                  ? "font-normal ps-[0.7rem] whitespace-nowrap "
+                  : "hidden"
               }`}
             >
               {sidebarLinks.themes.dark.title}
