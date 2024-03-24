@@ -10,11 +10,11 @@ export const sidebarLinks = {
   ],
   themes: {
     light: {
-      title: "Light Theme",
+      title: "light theme",
       icon: BiSun,
     },
     dark: {
-      title: "Dark Theme",
+      title: "dark theme",
       icon: BiMoon,
     },
   },

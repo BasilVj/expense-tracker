@@ -3,13 +3,15 @@ import { IconType } from "react-icons";
 
 type props = {
   iconName: IconType;
+  iconcontainerCls: string;
+  iconCls: string;
 };
-const Icon = ({ iconName }: props) => {
+const Icon = ({ iconName, iconcontainerCls, iconCls }: props) => {
   const Icons = iconName;
 
   return (
-    <div className="bg-opacity-100 bg-[#1E293B] px-[0.55rem] py-[0.70rem] rounded cursor-pointer">
-      <Icons className="text-gray-50 h-[22px] w-[23px]" />
+    <div className={`${iconcontainerCls}`}>
+      <Icons className={`${iconCls}`} />
     </div>
   );
 };
