@@ -1,13 +1,19 @@
 "use client";
 import { sidebarLinks } from "@/constants/sidebarLinks";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TbCurrencyTaka } from "react-icons/tb";
 import Icon from "../Icon";
+import { useTheme } from "next-themes";
 
 const Sidebar = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
-  const scheme = "Dark";
+  const { setTheme, theme } = useTheme();
+
+  useEffect(() => {
+    setTheme("dark");
+  }, []);
+
   return (
     <div
       className={`bg-slate-900 h-screen py-4 flex justify-between flex-col transition-all ease-in duration-300 ${
@@ -41,7 +47,7 @@ const Sidebar = () => {
           {sidebarLinks.navLinks.map((navLink, index) => (
             <ul
               key={index}
-              className={`flex justify-start bg-[#1E293B] mb-[0.6rem] text-white font-medium transition-all ease-in duration-300 ${
+              className={`flex justify-start cursor-pointer bg-[#1E293B] mb-[0.6rem] text-white font-medium transition-all ease-in duration-300 ${
                 toggleSidebar
                   ? "h-[41px] w-[233px] rounded-s items-center py-[0.6rem] ps-3"
                   : "h-[43px] w-[40px] rounded py-[0.6rem] ps-2"
@@ -69,14 +75,17 @@ const Sidebar = () => {
       </div>
 
       <div
-        className={`flex justify-start bg-[#1E293B]  text-white font-medium transition-all ease-in duration-300  ${
+        className={`flex justify-start cursor-pointer bg-[#1E293B]  text-white font-medium transition-all ease-in duration-300  ${
           toggleSidebar
             ? "h-[41px] w-[233px] rounded-s items-center ps-3"
             : "h-[43px] w-[40px] rounded items-center ps-2"
         }`}
+        onClick={() => {
+          theme === "dark" ? setTheme("light") : setTheme("dark");
+        }}
       >
-        {scheme === "Dark" ? (
-          <>
+        {theme === "dark" ? (
+          <div className="flex items-center">
             <Icon
               iconName={sidebarLinks.themes.light.icon}
               iconcontainerCls=""
@@ -85,15 +94,15 @@ const Sidebar = () => {
             <span
               className={`${
                 toggleSidebar
-                  ? "font-normal ps-[0.7rem] whitespace-nowrap "
+                  ? "font-normal ps-[0.7rem] whitespace-nowrap cursor-pointer"
                   : "hidden"
               }`}
             >
               {sidebarLinks.themes.light.title}
             </span>
-          </>
+          </div>
         ) : (
-          <>
+          <div className="flex items-center">
             <Icon
               iconName={sidebarLinks.themes.dark.icon}
               iconcontainerCls=""
@@ -108,7 +117,7 @@ const Sidebar = () => {
             >
               {sidebarLinks.themes.dark.title}
             </span>
-          </>
+          </div>
         )}
       </div>
     </div>
