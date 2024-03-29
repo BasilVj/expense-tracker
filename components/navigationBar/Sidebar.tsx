@@ -26,7 +26,7 @@ const Sidebar = () => {
            ${
              toggleSidebar
                ? "h-[46px] w-[233px] rounded-s justify-start "
-               : "h-[38px] w-[40px] rounded ps-2"
+               : "h-[38px] w-[40px] rounded ps-1"
            }`}
           onClick={() => setToggleSidebar((prev) => !prev)}
         >
@@ -75,50 +75,51 @@ const Sidebar = () => {
       </div>
 
       <div
-        className={`flex justify-start cursor-pointer bg-[#1E293B]  text-white font-medium transition-all ease-in duration-300  ${
-          toggleSidebar
-            ? "h-[41px] w-[233px] rounded-s items-center ps-3"
-            : "h-[43px] w-[40px] rounded items-center ps-2"
-        }`}
-        onClick={() => {
-          theme === "dark" ? setTheme("light") : setTheme("dark");
-        }}
+        className={`flex justify-start cursor-pointer bg-[#1E293B]  text-white font-medium transition-all ease-in duration-300 
+      ${
+        toggleSidebar
+          ? "h-[41px] w-[233px] rounded-s items-center ps-3"
+          : "h-[43px] w-[40px] rounded items-center ps-2"
+      }`}
+        onClick={() => (theme == "dark" ? setTheme("light") : setTheme("dark"))}
       >
-        {theme === "dark" ? (
-          <div className="flex items-center">
-            <Icon
-              iconName={sidebarLinks.themes.light.icon}
-              iconcontainerCls=""
-              iconCls={`text-gray-50 h-[21px] w-[22px]`}
-            />
-            <span
-              className={`${
-                toggleSidebar
-                  ? "font-normal ps-[0.7rem] whitespace-nowrap cursor-pointer"
-                  : "hidden"
-              }`}
-            >
-              {sidebarLinks.themes.light.title}
-            </span>
-          </div>
-        ) : (
-          <div className="flex items-center">
-            <Icon
-              iconName={sidebarLinks.themes.dark.icon}
-              iconcontainerCls=""
-              iconCls={`text-gray-50 h-[21px] w-[22px]`}
-            />
-            <span
-              className={`${
-                toggleSidebar
-                  ? "font-normal ps-[0.7rem] whitespace-nowrap "
-                  : "hidden"
-              }`}
-            >
-              {sidebarLinks.themes.dark.title}
-            </span>
-          </div>
-        )}
+        <div>
+          {theme === "light" ? (
+            <div className="flex items-center">
+              <Icon
+                iconName={sidebarLinks.themes.dark.icon}
+                iconcontainerCls=""
+                iconCls={`text-gray-50 h-[21px] w-[22px]`}
+              />
+              <span
+                className={`${
+                  toggleSidebar
+                    ? "font-normal ps-[0.7rem] whitespace-nowrap "
+                    : "hidden"
+                }`}
+              >
+                {sidebarLinks.themes.dark.title}
+              </span>
+            </div>
+          ) : (
+            <div className="flex items-center">
+              <Icon
+                iconName={sidebarLinks.themes.light.icon}
+                iconcontainerCls=""
+                iconCls={`text-gray-50 h-[21px] w-[22px]`}
+              />
+              <span
+                className={`${
+                  toggleSidebar
+                    ? "font-normal ps-[0.7rem] whitespace-nowrap cursor-pointer"
+                    : "hidden"
+                }`}
+              >
+                {sidebarLinks.themes.light.title}
+              </span>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
