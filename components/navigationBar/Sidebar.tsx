@@ -16,13 +16,14 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`bg-slate-900 h-screen py-4 flex justify-between flex-col transition-all ease-in duration-300 ${
+      className={`dark:bg-slate-900 bg-[#ffffff] h-screen py-4 flex justify-between flex-col transition-all ease-in duration-300 ${
         toggleSidebar ? "w-[249px] ps-4" : "w-[58px] items-center"
       }`}
     >
       <div>
         <button
-          className={`mb-6 p-1 flex justify-start items-center  bg-[#2463EA] text-white hover:bg-[#1C4ED9] cursor-pointer transition-all ease-in duration-300
+          className={`mb-6 p-1 flex justify-start items-center  bg-[#2463EA] text-white
+           hover:bg-[#1C4ED9] cursor-pointer transition-all ease-in duration-300
            ${
              toggleSidebar
                ? "h-[46px] w-[233px] rounded-s justify-start "
@@ -43,21 +44,22 @@ const Sidebar = () => {
             Track Taka
           </span>
         </button>
-        <div className="pt-4 transition-all ease-in duration-300">
+        <div className="pt-4">
           {sidebarLinks.navLinks.map((navLink, index) => (
             <ul
               key={index}
-              className={`flex justify-start cursor-pointer bg-[#1E293B] mb-[0.6rem] text-white font-medium transition-all ease-in duration-300 ${
-                toggleSidebar
-                  ? "h-[41px] w-[233px] rounded-s items-center py-[0.6rem] ps-3"
-                  : "h-[43px] w-[40px] rounded py-[0.6rem] ps-2"
-              }`}
+              className={`flex justify-start cursor-pointer dark:bg-[#1E293B] bg-[#cbd5e1] mb-[0.6rem] dark:text-white text-[#1E293B]
+               font-semibold transition-all ease-in duration-300 ${
+                 toggleSidebar
+                   ? "h-[41px] w-[233px] rounded-s items-center py-[0.6rem] ps-3"
+                   : "h-[43px] w-[40px] rounded py-[0.6rem] ps-2"
+               }`}
             >
               <Icon
                 key={index}
                 iconName={navLink.icon}
                 iconcontainerCls={`w-auto h-full`}
-                iconCls={`text-gray-50 h-[21px] w-[22px]`}
+                iconCls={`dark:text-gray-50 text-[#1E293B] h-[21px] w-[22px]`}
               />
 
               <li
