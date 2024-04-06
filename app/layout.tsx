@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/navigationBar/Sidebar";
 import { Providers } from "./providers";
+import MobileSidebar from "@/components/navigationBar/MobileSidebar";
+
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +23,12 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <Providers>
-          <Sidebar />
+          <div className="sm:block hidden">
+            <Sidebar />
+          </div>
+          <div className="sm:hidden block">
+            <MobileSidebar />
+          </div>
           {children}
         </Providers>
       </body>

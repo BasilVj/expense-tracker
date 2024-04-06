@@ -1,6 +1,5 @@
 "use client";
 import { sidebarLinks } from "@/constants/sidebarLinks";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { TbCurrencyTaka } from "react-icons/tb";
 import Icon from "../Icon";
@@ -8,7 +7,7 @@ import { useTheme } from "next-themes";
 
 const Sidebar = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
-  const { setTheme, theme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
 
   useEffect(() => {
     setTheme("dark");
@@ -83,10 +82,12 @@ const Sidebar = () => {
           ? "h-[41px] w-[233px] rounded-s items-center ps-3"
           : "h-[43px] w-[40px] rounded items-center ps-2"
       }`}
-        onClick={() => (theme == "dark" ? setTheme("light") : setTheme("dark"))}
+        onClick={() =>
+          resolvedTheme == "dark" ? setTheme("light") : setTheme("dark")
+        }
       >
         <div>
-          {theme === "light" ? (
+          {resolvedTheme === "light" ? (
             <div className="flex items-center">
               <Icon
                 iconName={sidebarLinks.themes.dark.icon}
