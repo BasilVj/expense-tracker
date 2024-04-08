@@ -10,19 +10,19 @@ const MobileSidebar = () => {
      dark:bg-[#1E293B] bg-[#ffffff] px-4"
     >
       <div className="flex w-full h-full items-center">
-        <div className="cursor-pointer flex justify-between w-full">
+        <ul className="cursor-pointer flex justify-between w-full">
           {sidebarLinks.navLinks.map((navLink, index) => (
-            <div className="dark:bg-[#334054] bg-[#cbd5e1] p-2 rounded">
+            <li className="dark:bg-[#334054] bg-[#cbd5e1] p-2 rounded" key={index}>
               <Icon
                 key={index}
                 iconName={navLink.icon}
                 iconcontainerCls={`w-auto h-full`}
                 iconCls={`dark:text-gray-50 text-[#1E293B] h-[25px] w-[25px]`}
               />
-            </div>
+            </li>
           ))}
           <MobileThemeToggler />
-        </div>
+        </ul>
       </div>
     </div>
   );

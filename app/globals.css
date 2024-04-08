@@ -3,8 +3,12 @@
 @tailwind utilities;
 
 @layer base {
-    body {
-      @apply dark:bg-[#0f172a] 
+  body {
+    @apply dark:bg-[#0f172a] 
           bg-[#f1f5f9];
-    }
   }
+}
+
+.page__wrapper {
+  @apply px-[6.5rem] py-12;
+}

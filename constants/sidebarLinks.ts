@@ -5,7 +5,7 @@ export const sidebarLinks = {
   navLinks: [
     { title: "Dashboard", icon: BiHomeAlt, path: "/dashboard" },
     { title: "Transactions", icon: BiMoney, path: "/transactions" },
-    { title: "New transaction", icon: BiPlusCircle, path: "/new-transaction" },
+    { title: "New transaction", icon: BiPlusCircle, path: "/transactions/create" },
     { title: "Settings", icon: BiCog, path: "/settings" },
   ],
   themes: {

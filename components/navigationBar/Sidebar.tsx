@@ -4,19 +4,18 @@ import React, { useEffect, useState } from "react";
 import { TbCurrencyTaka } from "react-icons/tb";
 import Icon from "../Icon";
 import { useTheme } from "next-themes";
+import { usePathname } from "next/navigation";
 
+import Link from "next/link";
 const Sidebar = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const { setTheme, resolvedTheme } = useTheme();
-
-  useEffect(() => {
-    setTheme("dark");
-  }, []);
+  const pathname = usePathname();
 
   return (
     <div
       className={`dark:bg-slate-900 bg-[#ffffff] h-screen py-4 flex justify-between flex-col transition-all ease-in duration-300 ${
-        toggleSidebar ? "w-[249px] ps-4" : "w-[58px] items-center"
+        toggleSidebar ? "w-[249px] ps-4" : "w-[58px] items-center z-10 fixed"
       }`}
     >
       <div>
@@ -44,34 +43,42 @@ const Sidebar = () => {
           </span>
         </button>
         <div className="pt-4">
-          {sidebarLinks.navLinks.map((navLink, index) => (
-            <ul
-              key={index}
-              className={`flex justify-start cursor-pointer dark:bg-[#1E293B] bg-[#cbd5e1] mb-[0.6rem] dark:text-white text-[#1E293B]
-               font-semibold transition-all ease-in duration-300 ${
-                 toggleSidebar
-                   ? "h-[41px] w-[233px] rounded-s items-center py-[0.6rem] ps-3"
-                   : "h-[43px] w-[40px] rounded py-[0.6rem] ps-2"
-               }`}
-            >
-              <Icon
-                key={index}
-                iconName={navLink.icon}
-                iconcontainerCls={`w-auto h-full`}
-                iconCls={`dark:text-gray-50 text-[#1E293B] h-[21px] w-[22px]`}
-              />
+          <ul>
+            {sidebarLinks.navLinks.map((navLink, index) => (
+              <li key={index}>
+                <Link href={`${navLink.path}`}>
+                  <div
+                    className={`flex justify-start cursor-pointer ${
+                      pathname === navLink.path &&
+                      "dark:bg-[#1E293B] bg-[#cbd5e1]"
+                    }  mb-[0.6rem] dark:text-white text-[#1E293B]
+                  font-semibold transition-all ease-in duration-300 ${
+                    toggleSidebar
+                      ? "h-[41px] w-[233px] rounded-s items-center py-[0.6rem] ps-3"
+                      : "h-[43px] w-[40px] rounded py-[0.6rem] ps-2"
+                  }`}
+                  >
+                    <Icon
+                      key={index}
+                      iconName={navLink.icon}
+                      iconcontainerCls={`w-auto h-full`}
+                      iconCls={`dark:text-gray-50 text-[#1E293B] h-[21px] w-[22px]`}
+                    />
 
-              <li
-                className={`${
-                  toggleSidebar
-                    ? "flex ps-[0.6rem] whitespace-nowrap"
-                    : "hidden"
-                }`}
-              >
-                {navLink.title}
+                    <p
+                      className={`${
+                        toggleSidebar
+                          ? "flex ps-[0.6rem] whitespace-nowrap"
+                          : "hidden"
+                      }`}
+                    >
+                      {navLink.title}
+                    </p>
+                  </div>
+                </Link>
               </li>
-            </ul>
-          ))}
+            ))}
+          </ul>
         </div>
       </div>
 
