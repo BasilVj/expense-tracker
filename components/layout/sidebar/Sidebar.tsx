@@ -2,20 +2,29 @@
 import { sidebarLinks } from "@/constants/sidebarLinks";
 import React, { useEffect, useState } from "react";
 import { TbCurrencyTaka } from "react-icons/tb";
-import Icon from "../Icon";
+import Icon from "../../Icon";
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
-
 import Link from "next/link";
+
 const Sidebar = () => {
-  const [toggleSidebar, setToggleSidebar] = useState(false);
   const { setTheme, resolvedTheme } = useTheme();
   const pathname = usePathname();
+  const [toggleSidebar, setToggleSidebar] = useState(false);
+  const [sidebarValue, setSidebarValue] = useState("");
+  const dataSidebar = document.body.getAttribute("data-sidebar");
+
+  useEffect(() => {
+    if (dataSidebar) {
+      setSidebarValue(dataSidebar);
+    }
+  }, [toggleSidebar]);
 
   return (
     <div
-      className={`dark:bg-slate-900 bg-[#ffffff] h-screen py-4 flex justify-between flex-col transition-all ease-in duration-300 ${
-        toggleSidebar ? "w-[249px] ps-4" : "w-[58px] items-center z-10 fixed"
+      data-test="false"
+      className={`z-10 fixed dark:bg-slate-900 bg-[#ffffff] h-screen py-4 flex justify-between flex-col transition-all ease-in duration-300 ${
+        toggleSidebar ? "w-[249px] ps-4" : "w-[58px] items-center "
       }`}
     >
       <div>
@@ -27,7 +36,13 @@ const Sidebar = () => {
                ? "h-[46px] w-[233px] rounded-s justify-start "
                : "h-[38px] w-[40px] rounded ps-1"
            }`}
-          onClick={() => setToggleSidebar((prev) => !prev)}
+          onClick={() => {
+            setToggleSidebar((prev) => !prev);
+            document.body.setAttribute(
+              "data-sidebar",
+              sidebarValue === "true" ? "false" : "true"
+            );
+          }}
         >
           <TbCurrencyTaka
             className={`h-full w-auto ${toggleSidebar ? "p-1 ps-2" : ""}`}

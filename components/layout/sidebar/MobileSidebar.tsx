@@ -1,6 +1,6 @@
 import { sidebarLinks } from "@/constants/sidebarLinks";
 import React from "react";
-import Icon from "../Icon";
+import Icon from "../../Icon";
 import MobileThemeToggler from "./MobileThemeToggler";
 
 const MobileSidebar = () => {
@@ -12,7 +12,10 @@ const MobileSidebar = () => {
       <div className="flex w-full h-full items-center">
         <ul className="cursor-pointer flex justify-between w-full">
           {sidebarLinks.navLinks.map((navLink, index) => (
-            <li className="dark:bg-[#334054] bg-[#cbd5e1] p-2 rounded" key={index}>
+            <li
+              className="dark:bg-[#334054] bg-[#cbd5e1] p-2 rounded"
+              key={index}
+            >
               <Icon
                 key={index}
                 iconName={navLink.icon}

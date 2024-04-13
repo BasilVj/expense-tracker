@@ -9,6 +9,10 @@
   }
 }
 
-.page__wrapper {
-  @apply px-[6.5rem] py-12;
+[data-sidebar="true"] .page__wrapper {
+  @apply ps-[18rem] py-12 pe-[6.5rem] transition-all duration-300 ease-in;
+}
+
+[data-sidebar="false"] .page__wrapper {
+  @apply px-[6.5rem] py-12 transition-all duration-300 ease-in;
 }
