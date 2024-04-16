@@ -2,6 +2,7 @@ import { sidebarLinks } from "@/constants/sidebarLinks";
 import React from "react";
 import Icon from "../../Icon";
 import MobileThemeToggler from "./MobileThemeToggler";
+import Link from "next/link";
 
 const MobileSidebar = () => {
   return (
@@ -16,12 +17,14 @@ const MobileSidebar = () => {
               className="dark:bg-[#334054] bg-[#cbd5e1] p-2 rounded"
               key={index}
             >
-              <Icon
-                key={index}
-                iconName={navLink.icon}
-                iconcontainerCls={`w-auto h-full`}
-                iconCls={`dark:text-gray-50 text-[#1E293B] h-[25px] w-[25px]`}
-              />
+              <Link href={`${navLink.path}`}>
+                <Icon
+                  key={index}
+                  iconName={navLink.icon}
+                  iconcontainerCls={`w-auto h-full`}
+                  iconCls={`dark:text-gray-50 text-[#1E293B] h-[25px] w-[25px]`}
+                />
+              </Link>
             </li>
           ))}
           <MobileThemeToggler />

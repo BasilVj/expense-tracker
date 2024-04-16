@@ -20,6 +20,14 @@ const Sidebar = () => {
     }
   }, [toggleSidebar]);
 
+  const handleSidebarToggle = () => {
+    setToggleSidebar((prev) => !prev);
+    document.body.setAttribute(
+      "data-sidebar",
+      sidebarValue === "true" ? "false" : "true"
+    );
+  };
+
   return (
     <div
       data-test="false"
@@ -36,13 +44,7 @@ const Sidebar = () => {
                ? "h-[46px] w-[233px] rounded-s justify-start "
                : "h-[38px] w-[40px] rounded ps-1"
            }`}
-          onClick={() => {
-            setToggleSidebar((prev) => !prev);
-            document.body.setAttribute(
-              "data-sidebar",
-              sidebarValue === "true" ? "false" : "true"
-            );
-          }}
+          onClick={handleSidebarToggle}
         >
           <TbCurrencyTaka
             className={`h-full w-auto ${toggleSidebar ? "p-1 ps-2" : ""}`}
