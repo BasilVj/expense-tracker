@@ -2,7 +2,7 @@
 import { sidebarLinks } from "@/constants/sidebarLinks";
 import React, { useEffect, useState } from "react";
 import { TbCurrencyTaka } from "react-icons/tb";
-import Icon from "../../Icon";
+import Icon from "../../common/Icon";
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
 import Link from "next/link";

@@ -14,7 +14,7 @@
 }
 
 [data-sidebar="false"] .page__wrapper {
-  @apply px-[1.3rem] sm:ps-[6rem] sm:pe-[2.5rem] lg:px-[6.2rem] sm:py-[2.8rem] py-10 transition-all duration-300 ease-in;
+  @apply px-[1.3rem] sm:ps-[6rem] sm:pe-[2.5rem] lg:ps-[6.2rem] sm:py-[2.8rem] py-10 transition-all duration-300 ease-in;
 }
 
 .react-datepicker-popper {

@@ -2,7 +2,7 @@
 import { sidebarLinks } from "@/constants/sidebarLinks";
 import React, { useEffect } from "react";
 import { useTheme } from "next-themes";
-import Icon from "../../Icon";
+import Icon from "../../common/Icon";
 
 const MobileThemeToggler = () => {
   const { setTheme, theme } = useTheme();

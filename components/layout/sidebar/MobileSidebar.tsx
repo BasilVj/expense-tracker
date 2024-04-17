@@ -1,6 +1,6 @@
 import { sidebarLinks } from "@/constants/sidebarLinks";
 import React from "react";
-import Icon from "../../Icon";
+import Icon from "../../common/Icon";
 import MobileThemeToggler from "./MobileThemeToggler";
 import Link from "next/link";
 
