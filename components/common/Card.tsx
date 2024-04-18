@@ -1,6 +1,7 @@
 import React from "react";
 import { IconType } from "react-icons";
 import Icon from "./Icon";
+import CountUpAmount from "./CountUpAmount";
 
 type cardProps = {
   amount: number;
@@ -23,7 +24,7 @@ const Card = ({ amount, icon, type, iconBgColor, marginRight }: cardProps) => {
       />
       <div className="flex flex-col justify-center h-full">
         <h3 className="dark:text-slate-300 text-slate-600">{type}</h3>
-        <h1 className="text-3xl font-bold">{amount}</h1>
+        <CountUpAmount amount={amount} />
       </div>
     </div>
   );

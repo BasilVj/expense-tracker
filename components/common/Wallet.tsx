@@ -17,7 +17,7 @@ const Wallet = () => {
         iconBgColor="bg-[#2563EB]"
       />
       <Card
-        amount={180}
+        amount={18220}
         type="Income"
         icon={BsGraphUp}
         iconBgColor="bg-[#22CE55]"
