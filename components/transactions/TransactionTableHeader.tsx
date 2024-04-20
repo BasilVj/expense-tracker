@@ -4,10 +4,12 @@ import React from "react";
 const TransactionTableHeader = () => {
   return (
     <thead>
-      <tr className="bg-[#334155]">
+      <tr className="dark:bg-[#334155] bg-[#E2E8F0]">
         {tableHeaders.map((tableHeader, index) => (
           <th
-            className="text-[1rem] border-x border-[#6B7280] text-start px-3 py-3"
+            className={`${
+              tableHeader === "Actions" ? "text-center" : "text-start"
+            } border-x dark:border-[#6B7280] border-[#DADFE6] px-3 py-3`}
             key={index}
           >
             {tableHeader}

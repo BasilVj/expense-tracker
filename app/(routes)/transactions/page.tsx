@@ -4,7 +4,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="page__wrapper">
+    <div className="page__wrapper max-w-full ">
       <div>
         <h1 className="text-2xl font-bold">Transactions</h1>
       </div>

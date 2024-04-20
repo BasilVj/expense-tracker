@@ -10,13 +10,17 @@
 }
 
 [data-sidebar="true"] .page__wrapper {
-  @apply ps-4 pe-4 sm:ps-[6rem] sm:pe-[2.5rem] lg:ps-[18rem] sm:py-[2.8rem] lg:pe-[6.5rem] transition-all duration-300 ease-in;
+  @apply mb-10 ps-4 pe-4 sm:ps-[6rem] sm:pe-[2.5rem] lg:ps-[18rem] sm:py-[2.8rem] lg:pe-[6.5rem] transition-all duration-300 ease-in;
 }
 
 [data-sidebar="false"] .page__wrapper {
-  @apply px-[1.3rem] sm:ps-[6rem] sm:pe-[2.5rem] lg:ps-[6.2rem] sm:py-[2.8rem] py-10 transition-all duration-300 ease-in;
+  @apply mb-10 px-[1.3rem] sm:ps-[6rem] sm:pe-[2.5rem] lg:ps-[6.2rem] sm:py-[2.8rem] py-10 transition-all duration-300 ease-in;
 }
 
 .react-datepicker-popper {
   @apply ml-[2rem] pb-2 pt-2;
+}
+
+.transaction__table-border {
+  @apply px-3 py-3 border-r dark:border-[#374151] border-[#E5E7EB];
 }
