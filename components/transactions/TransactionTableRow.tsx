@@ -6,7 +6,10 @@ const TransactionTableRow = () => {
   return (
     <tbody className="dark:bg-[#1E293B] bg-white w-full">
       {tableData.map((data, index) => (
-        <tr className="w-full border dark:border-[#374151] border-[#E5E7EB]" key={index}>
+        <tr
+          className="w-full border dark:border-[#374151] border-[#E5E7EB]"
+          key={index}
+        >
           <td className="transaction__table-border">{data.title}</td>
           <td className="transaction__table-border">{data.amount}</td>
           <td className="transaction__table-border lowercase">
@@ -26,12 +29,12 @@ const TransactionTableRow = () => {
             <Icon
               iconName={data.actions.edit}
               iconCls="text-white"
-              iconcontainerCls="bg-[#2563EB] p-2"
+              iconcontainerCls="bg-[#2563EB] p-2 cursor-pointer"
             />
             <Icon
               iconName={data.actions.delete}
               iconCls="text-white"
-              iconcontainerCls="bg-[#EF4444] p-2"
+              iconcontainerCls="bg-[#EF4444] p-2 cursor-pointer"
             />
           </td>
         </tr>
