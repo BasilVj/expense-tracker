@@ -12,9 +12,12 @@ const Sidebar = () => {
   const pathname = usePathname();
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const [sidebarValue, setSidebarValue] = useState("");
-  const dataSidebar = document.body.getAttribute("data-sidebar");
+  let dataSidebar = "";
 
   useEffect(() => {
+    if (document.body.getAttribute("data-sidebar")) {
+      dataSidebar = document.body.getAttribute("data-sidebar")!;
+    }
     if (dataSidebar) {
       setSidebarValue(dataSidebar);
     }
