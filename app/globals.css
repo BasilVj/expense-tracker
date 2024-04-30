@@ -25,26 +25,24 @@
   @apply px-3 py-3 border-r dark:border-[#374151] border-[#E5E7EB];
 }
 
+.react-select__control {
+  @apply rounded-sm py-1 dark:bg-slate-700 border-gray-600 !important;
+}
+.react-select__menu {
+  @apply rounded-sm py-1 dark:bg-slate-700 border-gray-600 !important;
+}
+
+.react-select__option--is-focused  {
+  @apply dark:text-slate-900 !important;
+}
+
+.react-select__single-value {
+  @apply dark:text-white !important;
+}
+
 @media screen and (max-width: 360px) {
   .searchBar__xs-width {
     @apply w-[220px];
   }
 }
 
-@media screen and (min-width: 820px) {
-  .offCanvas__width {
-    @apply w-[37%];
-  }
-}
-
-@media screen and (min-width: 912px) {
-  .offCanvas__width {
-    @apply w-[32.5%];
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .offCanvas__width {
-    @apply w-[38.5%];
-  }
-}
