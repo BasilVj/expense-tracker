@@ -59,7 +59,7 @@ const Sidebar = () => {
                 : "hidden"
             }`}
           >
-            Track Taka
+            Hermestrack
           </span>
         </button>
         <div className="pt-4">
