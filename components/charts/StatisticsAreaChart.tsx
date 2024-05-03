@@ -62,7 +62,7 @@ const StatisticsAreaChart = ({
             </defs>
             <XAxis tick={{ fontSize: 12 }} dataKey="date" />
             <YAxis tick={{ fontSize: 12 }} />
-            <CartesianGrid strokeDasharray="5 5" />
+            <CartesianGrid strokeLinecap="butt" />
             <Tooltip content={<CustomTooltip title={title} />} />
             <Area
               type="monotone"
