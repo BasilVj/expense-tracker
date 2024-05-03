@@ -7,29 +7,41 @@ import {
   BsWallet,
 } from "react-icons/bs";
 
-const Wallet = () => {
+type WalletProps = {
+  income: number;
+  balance: number;
+  expense: number;
+  transactionsTotal: number;
+};
+
+const Wallet = ({
+  income,
+  balance,
+  expense,
+  transactionsTotal,
+}: WalletProps) => {
   return (
     <div className="mt-11 flex w-full justify-between flex-wrap">
       <Card
-        amount={20}
+        amount={balance}
         type="Wallet"
         icon={BsWallet}
         iconBgColor="bg-[#2563EB]"
       />
       <Card
-        amount={18220}
+        amount={income}
         type="Income"
         icon={BsGraphUp}
         iconBgColor="bg-[#22CE55]"
       />
       <Card
-        amount={60}
+        amount={expense}
         type="Expense"
         icon={BsGraphDown}
         iconBgColor="bg-[#EF4444]"
       />
       <Card
-        amount={16}
+        amount={transactionsTotal}
         type="Transactions"
         icon={BsCurrencyDollar}
         iconBgColor="bg-[#FACC15]"
