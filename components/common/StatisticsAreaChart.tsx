@@ -1,6 +1,6 @@
 "use client";
 import { TooltipProps } from "recharts";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Area,
   AreaChart,
@@ -34,6 +34,16 @@ const StatisticsAreaChart = ({
   chartData,
   title,
 }: StatisticsChartProps) => {
+  const generateData = (chartData: chartData[]) => {
+    const newData = [];
+    for (let i = 1; i <= 30; i++) {
+      const dataPoint = chartData.find((item) => parseInt(item.date) === i);
+      newData.push(dataPoint || { date: i.toString(), amount: 0 });
+    }
+    return newData;
+  };
+  const data = generateData(chartData);
+
   return (
     <div className="mt-6 tracking-wider">
       <h2 className="text-sm font-medium mb-1 capitalize">{title}</h2>
@@ -42,7 +52,7 @@ const StatisticsAreaChart = ({
           <AreaChart
             width={730}
             height={250}
-            data={chartData}
+            data={data}
             margin={{
               top: 20,
               right: 20,

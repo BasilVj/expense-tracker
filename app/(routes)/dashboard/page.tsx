@@ -1,4 +1,4 @@
-import StatisticsChart from "@/components/charts/StatisticsAreaChart";
+import StatisticsChart from "@/components/common/StatisticsAreaChart";
 import Wallet from "@/components/common/Wallet";
 import { statistics } from "@/data/statistics";
 import React from "react";
