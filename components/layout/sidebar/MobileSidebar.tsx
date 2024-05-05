@@ -1,10 +1,14 @@
+"use client";
 import { sidebarLinks } from "@/constants/sidebarLinks";
 import React from "react";
 import Icon from "../../common/Icon";
 import MobileThemeToggler from "./MobileThemeToggler";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const MobileSidebar = () => {
+  const pathname = usePathname();
+
   return (
     <div
       className="w-screen h-[55px] flex justify-center fixed bottom-0 z-10 overflow-hidden
@@ -14,7 +18,9 @@ const MobileSidebar = () => {
         <ul className="cursor-pointer flex justify-between w-full">
           {sidebarLinks.navLinks.map((navLink, index) => (
             <li
-              className="dark:bg-[#334054] bg-[#cbd5e1] p-2 rounded"
+              className={`${
+                pathname === navLink.path && "dark:bg-[#334155] bg-[#cbd5e1]"
+              } p-2 rounded`}
               key={index}
             >
               <Link href={`${navLink.path}`}>

@@ -70,7 +70,7 @@ const Sidebar = () => {
                   <div
                     className={`flex justify-start cursor-pointer ${
                       pathname === navLink.path &&
-                      "dark:bg-[#1E293B] bg-[#cbd5e1]"
+                      "dark:bg-[#334155] bg-[#cbd5e1]"
                     }  mb-[0.6rem] dark:text-white text-[#1E293B]
                   font-semibold transition-all ease-in duration-300 ${
                     toggleSidebar

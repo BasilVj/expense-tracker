@@ -1,18 +1,15 @@
 "use client";
 import { sidebarLinks } from "@/constants/sidebarLinks";
-import React, { useEffect } from "react";
+import React from "react";
 import { useTheme } from "next-themes";
 import Icon from "../../common/Icon";
 
 const MobileThemeToggler = () => {
   const { setTheme, theme } = useTheme();
-  useEffect(() => {
-    setTheme("dark");
-  }, []);
   return (
     <div
       onClick={() => (theme == "dark" ? setTheme("light") : setTheme("dark"))}
-      className="dark:bg-[#334054] bg-[#cbd5e1] p-2 rounded"
+      className="p-2 rounded"
     >
       {theme === "light" ? (
         <Icon
