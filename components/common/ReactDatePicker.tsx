@@ -16,7 +16,8 @@ const DatePicker = () => {
       </span>
 
       <ReactDatePicker
-      id="transactionDatePicker"
+        name="date"
+        id="transactionDatePicker"
         selected={selectedDate}
         onChange={(date: Date) => setSelectedDate(date)}
         className="bg-[#ffffff] dark:bg-[#334155] outline-none cursor-pointer w-full"
