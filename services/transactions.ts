@@ -1,9 +1,9 @@
 import { db } from "@/config/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 
-type Transaction = {
+export type Transaction = {
   title: string;
-  id: string;
+  id?: string;
   amount: number;
   category: string;
   type: string;
@@ -23,4 +23,8 @@ export const fetchTransactions = async () => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const addTransaction = async (data: Transaction) => {
+  await addDoc(transactionsCollectionRef, data);
 };
