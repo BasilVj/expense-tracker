@@ -1,4 +1,5 @@
-import TransactionForm from "@/components/common/TransactionForm";
+
+import TransactionForm from "@/components/transactions/TransactionForm";
 import React from "react";
 
 const page = () => {

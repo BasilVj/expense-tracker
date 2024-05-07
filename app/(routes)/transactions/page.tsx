@@ -12,7 +12,7 @@ const page = () => {
       <div>
         <h1 className="text-2xl font-bold">Transactions</h1>
       </div>
-      <Wallet />
+      <Wallet balance={1} expense={1} income={1} transactionsTotal={1}/>
       <div className="flex justify-between mt-10 items-center">
         <SearchBar />
         <TransactionTableActionBtns />

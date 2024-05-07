@@ -1,4 +1,5 @@
-import DatePicker from "../common/ReactDatePicker";
+"use client";
+import DatePicker from "./DatePicker";
 import { addNewTransaction } from "@/server-actions/actions";
 import TransactionCategoryDropDown from "./TransactionCategoryDropDown";
 
@@ -41,7 +42,7 @@ const TransactionForm = () => {
             <option value="expense">Expense</option>
           </select>
         </label>
-        <TransactionCategoryDropDown/>
+        <TransactionCategoryDropDown />
         <div className="mb-4 flex flex-col">
           <label>Transaction Date</label>
           <DatePicker />
