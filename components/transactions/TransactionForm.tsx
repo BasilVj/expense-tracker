@@ -4,6 +4,10 @@ import { addNewTransaction } from "@/server-actions/actions";
 import TransactionCategoryDropDown from "./TransactionCategoryDropDown";
 
 const TransactionForm = () => {
+ /*  const clientSideAction = async (formData: FormData) => {
+    await addNewTransaction(formData);
+  }; */
+
   return (
     <div className="pt-8 w-full lg:w-[500px]">
       <form action={addNewTransaction}>

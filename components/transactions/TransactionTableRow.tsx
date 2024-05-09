@@ -1,7 +1,8 @@
 import React from "react";
 import Icon from "../common/Icon";
 import { fetchTransactions } from "@/services/transactions";
-import { BsPen, BsTrash } from "react-icons/bs";
+import { BsPen } from "react-icons/bs";
+import DeleteTransaction from "./DeleteTransaction";
 const TransactionTableRow = async () => {
   const tableData = await fetchTransactions();
 
@@ -34,11 +35,7 @@ const TransactionTableRow = async () => {
                 iconCls="text-white"
                 iconcontainerCls="bg-[#2563EB] p-2 cursor-pointer"
               />
-              <Icon
-                iconName={BsTrash}
-                iconCls="text-white"
-                iconcontainerCls="bg-[#EF4444] p-2 cursor-pointer"
-              />
+              <DeleteTransaction transactionId={data.id && data.id} />
             </td>
           </tr>
         ))}

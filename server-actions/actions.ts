@@ -1,9 +1,14 @@
 "use server";
 
-import { Transaction, addTransaction } from "@/services/transactions";
+import {
+  Transaction,
+  addTransaction,
+  deleteTransaction,
+} from "@/services/transactions";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
-export const addNewTransaction = (data: FormData) => {
+export const addNewTransaction = async (data: FormData) => {
   const { title, amount, type, category, date } = Object.fromEntries(data);
 
   const transaction: Transaction = {
@@ -15,7 +20,18 @@ export const addNewTransaction = (data: FormData) => {
   };
 
   try {
-    addTransaction(transaction);
+    await addTransaction(transaction);
+  } catch (error) {
+    console.log(error);
+  }
+  revalidatePath("/transactions");
+  redirect("/transactions");
+};
+
+export const deleteTransactionAction = async (data: FormData) => {
+  const { id } = Object.fromEntries(data);
+  try {
+    await deleteTransaction(id.toString());
   } catch (error) {
     console.log(error);
   }

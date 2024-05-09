@@ -5,6 +5,7 @@ import Sidebar from "@/components/layout/sidebar/Sidebar";
 import { Providers } from "./providers";
 import MobileSidebar from "@/components/layout/sidebar/MobileSidebar";
 import OffCanvasContextProvider from "@/context/OffCanvasContextProvider";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Hermestrack",
@@ -28,6 +29,7 @@ export default function RootLayout({
               <MobileSidebar />
             </div>
             {children}
+            <Toaster position="bottom-right" />
           </Providers>
         </OffCanvasContextProvider>
       </body>
