@@ -4,7 +4,7 @@ import TransactionTableRow from "./TransactionTableRow";
 
 const TransactionTable = () => {
   return (
-    <div className="mt-8 overflow-hidden overflow-x-scroll sm:overflow-auto">
+    <div className="mt-5 overflow-hidden overflow-x-scroll sm:overflow-auto">
       <table className="w-full">
         <TransactionTableHeader />
         <TransactionTableRow />

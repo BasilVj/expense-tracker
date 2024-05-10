@@ -5,6 +5,8 @@ import {
   getDocs,
   deleteDoc,
   doc,
+  getDoc,
+  updateDoc,
 } from "firebase/firestore";
 
 export type Transaction = {
@@ -34,8 +36,27 @@ export const fetchTransactions = async () => {
 export const addTransaction = async (data: Transaction) => {
   await addDoc(transactionsCollectionRef, data);
 };
+export const updateTransaction = async (data: Transaction, id: string) => {
+  const transactionDoc = doc(db, "transactions", id);
+  try {
+    await updateDoc(transactionDoc, data);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const deleteTransaction = async (id: string) => {
   const transactionDoc = doc(db, "transactions", id);
   await deleteDoc(transactionDoc);
+};
+
+export const fetchTransactionByID = async (id: string) => {
+  const transactionDoc = doc(db, "transactions", id);
+  try {
+    const data = await getDoc(transactionDoc);
+    const filteredData = data.data() as Transaction;
+    return filteredData;
+  } catch (error) {
+    console.log(error);
+  }
 };

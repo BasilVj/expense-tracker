@@ -12,11 +12,11 @@ const DeleteTransaction = ({ transactionId }: DeleteTransactionProps) => {
     <div>
       <form action={deleteTransactionAction}>
         <input type="hidden" name="id" value={transactionId} />
-        <button className="m-0 p-0">
+        <button>
           <Icon
             iconName={BsTrash}
             iconCls="text-white"
-            iconcontainerCls="bg-[#EF4444] p-2 cursor-pointer"
+            iconcontainerCls="bg-[#EF4444] p-2 cursor-pointer rounded-sm"
           />
         </button>
       </form>

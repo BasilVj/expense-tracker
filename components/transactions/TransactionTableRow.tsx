@@ -3,6 +3,7 @@ import Icon from "../common/Icon";
 import { fetchTransactions } from "@/services/transactions";
 import { BsPen } from "react-icons/bs";
 import DeleteTransaction from "./DeleteTransaction";
+import Link from "next/link";
 const TransactionTableRow = async () => {
   const tableData = await fetchTransactions();
 
@@ -29,12 +30,14 @@ const TransactionTableRow = async () => {
               </span>
             </td>
             <td className="transaction__table-border">{data.date}</td>
-            <td className="flex justify-center gap-1 py-2 w-[80px] sm:w-full">
-              <Icon
-                iconName={BsPen}
-                iconCls="text-white"
-                iconcontainerCls="bg-[#2563EB] p-2 cursor-pointer"
-              />
+            <td className="flex justify-center gap-1 pt-2 w-[80px] sm:w-full">
+              <Link href={`/transactions/${data.id}`}>
+                <Icon
+                  iconName={BsPen}
+                  iconCls="text-white"
+                  iconcontainerCls="bg-[#2563EB] p-2 cursor-pointer rounded-sm"
+                />
+              </Link>
               <DeleteTransaction transactionId={data.id && data.id} />
             </td>
           </tr>
