@@ -51,7 +51,7 @@ export const updateTransactionAction = async (data: FormData) => {
   };
 
   try {
-    updateTransaction(transaction, id.toString());
+    await updateTransaction(transaction, id.toString());
   } catch (error) {
     console.log(error);
   }

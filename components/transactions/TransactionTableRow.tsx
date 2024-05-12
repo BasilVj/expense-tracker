@@ -1,16 +1,36 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Icon from "../common/Icon";
-import { fetchTransactions } from "@/services/transactions";
+import { Transaction } from "@/services/transactions";
 import { BsPen } from "react-icons/bs";
 import DeleteTransaction from "./DeleteTransaction";
 import Link from "next/link";
-const TransactionTableRow = async () => {
-  const tableData = await fetchTransactions();
+import { useOffCanvasContext } from "@/hooks/useOffCanvasContext";
+type TransactionTableRow = {
+  tableData: Transaction[];
+};
+
+const TransactionTableRow = ({ tableData }: TransactionTableRow) => {
+  const { transactionCategory } = useOffCanvasContext();
+
+  const [transactionData, setTransactionData] =
+    useState<Transaction[]>(tableData);
+
+  useEffect(() => {
+    if (transactionCategory !== "" && tableData) {
+      const filteredDataByCategory = tableData.filter(
+        (data) => data.category === transactionCategory
+      );
+      setTransactionData(filteredDataByCategory);
+    } else {
+      setTransactionData(tableData);
+    }
+  }, [transactionCategory]);
 
   return (
     <tbody className="dark:bg-[#1E293B] bg-white w-full">
-      {tableData &&
-        tableData.map((data, index) => (
+      {transactionData &&
+        transactionData.map((data, index) => (
           <tr
             className="w-full border dark:border-[#374151] border-[#E5E7EB]"
             key={index}
@@ -38,7 +58,7 @@ const TransactionTableRow = async () => {
                   iconcontainerCls="bg-[#2563EB] p-2 cursor-pointer rounded-sm"
                 />
               </Link>
-              <DeleteTransaction transactionId={data.id && data.id} />
+              <DeleteTransaction transactionId={data.id!} />
             </td>
           </tr>
         ))}

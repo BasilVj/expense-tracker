@@ -6,6 +6,7 @@ import {
 } from "@/server-actions/actions";
 import TransactionCategoryDropDown from "./TransactionCategoryDropDown";
 import { Transaction } from "@/services/transactions";
+import { useEffect } from "react";
 
 type TransactionFormType = {
   formType: string;
@@ -21,6 +22,12 @@ const TransactionForm = ({
   /*  const clientSideAction = async (formData: FormData) => {
     await addNewTransaction(formData);
   }; */
+
+  useEffect(() => {
+    if (transactionData) {
+      console.log(transactionData);
+    }
+  }, [transactionData]);
 
   return (
     <div className="pt-8 w-full lg:w-[500px]">
@@ -69,7 +76,7 @@ const TransactionForm = ({
         <TransactionCategoryDropDown category={transactionData?.category} />
         <div className="mb-4 flex flex-col">
           <label>Transaction Date</label>
-          <DatePicker date={transactionData?.date} />
+          <DatePicker date={transactionData?.date && transactionData.date} />
         </div>
         {id && <input type="hidden" value={id} name="id" />}
         <div className="w-full flex justify-end mt-10">

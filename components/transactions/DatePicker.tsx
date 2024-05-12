@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { BsCalendar2Event } from "react-icons/bs";
-
+import { parse } from "date-fns";
 type DatePicker = {
   date?: string;
 };
@@ -12,7 +12,8 @@ const DatePicker = ({ date }: DatePicker) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   useEffect(() => {
     if (date) {
-      setSelectedDate(new Date(date));
+      const parsedDate = parse(date, "dd/MM/yyyy", new Date());
+      setSelectedDate(parsedDate);
     }
   }, [date]);
 

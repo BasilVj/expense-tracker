@@ -1,12 +1,17 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { BsXLg } from "react-icons/bs";
 import Icon from "../common/Icon";
 import { useOffCanvasContext } from "@/hooks/useOffCanvasContext";
 import { categories } from "@/data/Transaction-categories";
 
 const OffCanavsFilter = () => {
-  const { toggleOffcanvas, setToggleOffcanvas } = useOffCanvasContext();
+  const {
+    toggleOffcanvas,
+    setToggleOffcanvas,
+    setTransactionCategory,
+    transactionCategory,
+  } = useOffCanvasContext();
 
   return (
     <div
@@ -53,20 +58,27 @@ const OffCanavsFilter = () => {
             <option value="highToLow">Amount High to Low</option>
           </select>
         </label>
-        <label className="flex flex-col">
+        <div className="flex flex-col">
           <span className="font-medium mb-1">Categories</span>
           <ul>
             {categories.map((category, index) => (
               <li key={index} className="flex gap-2 my-2">
                 <input
                   type="checkbox"
-                  onClick={() => console.log(category.value)}
+                  id={`category-${index}`}
+                  onClick={() =>
+                    transactionCategory !== ""
+                      ? setTransactionCategory("")
+                      : setTransactionCategory(category.value)
+                  }
                 />
-                <span className="font-normal">{category.label}</span>
+                <label htmlFor={`category-${index}`} className="font-normal">
+                  {category.label}
+                </label>
               </li>
             ))}
           </ul>
-        </label>
+        </div>
       </div>
     </div>
   );
