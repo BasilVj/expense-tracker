@@ -11,21 +11,49 @@ type TransactionTableRow = {
 };
 
 const TransactionTableRow = ({ tableData }: TransactionTableRow) => {
-  const { transactionCategory } = useOffCanvasContext();
+  const { transactionCategory, transactionType } = useOffCanvasContext();
 
   const [transactionData, setTransactionData] =
     useState<Transaction[]>(tableData);
 
+  const filterTableData = (
+    key: keyof Transaction,
+    filterProperty: string,
+    dataToBeFiltered: Transaction[]
+  ) => {
+    return dataToBeFiltered.filter((data) => data[key] === filterProperty);
+  };
+
+  const filterTableDataByTransactionType = (data: Transaction[]) => {
+    const filteredDataByType = filterTableData("type", transactionType, data);
+    setTransactionData(filteredDataByType);
+  };
+
   useEffect(() => {
-    if (transactionCategory !== "" && tableData) {
-      const filteredDataByCategory = tableData.filter(
-        (data) => data.category === transactionCategory
-      );
-      setTransactionData(filteredDataByCategory);
+    if (transactionType !== "all") {
+      if (transactionCategory !== "") {
+        const filteredDataByCategory = filterTableData(
+          "category",
+          transactionCategory,
+          tableData
+        );
+        filterTableDataByTransactionType(filteredDataByCategory);
+      } else {
+        filterTableDataByTransactionType(tableData);
+      }
     } else {
-      setTransactionData(tableData);
+      if (transactionCategory !== "") {
+        const filteredDataByCategory = filterTableData(
+          "category",
+          transactionCategory,
+          tableData
+        );
+        setTransactionData(filteredDataByCategory);
+      } else {
+        setTransactionData(tableData);
+      }
     }
-  }, [transactionCategory]);
+  }, [transactionCategory, transactionType]);
 
   return (
     <tbody className="dark:bg-[#1E293B] bg-white w-full">

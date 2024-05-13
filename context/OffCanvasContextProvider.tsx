@@ -10,6 +10,8 @@ type OffCanvasContext = {
   setToggleOffcanvas: React.Dispatch<React.SetStateAction<boolean>>;
   transactionCategory: string;
   setTransactionCategory: React.Dispatch<React.SetStateAction<string>>;
+  transactionType: string;
+  setTransactionType: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const OffCanvasContext = createContext<OffCanvasContext | null>(null);
@@ -19,11 +21,14 @@ const OffCanvasContextProvider = ({
 }: OffCanvasContextProviderProps) => {
   const [toggleOffcanvas, setToggleOffcanvas] = useState(false);
   const [transactionCategory, setTransactionCategory] = useState("");
+  const [transactionType, setTransactionType] = useState("all");
   const value = {
     toggleOffcanvas,
     setToggleOffcanvas,
     transactionCategory,
     setTransactionCategory,
+    transactionType,
+    setTransactionType,
   };
   return (
     <OffCanvasContext.Provider value={value}>

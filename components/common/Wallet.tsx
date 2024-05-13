@@ -21,7 +21,7 @@ const Wallet = ({
   transactionsTotal,
 }: WalletProps) => {
   return (
-    <div className="mt-11 flex w-full justify-between flex-wrap">
+    <div className="mt-11 flex w-full gap-5 flex-wrap">
       <Card
         amount={balance}
         type="Wallet"
