@@ -6,9 +6,10 @@ import { BsCalendar2Event } from "react-icons/bs";
 import { parse } from "date-fns";
 type DatePicker = {
   date?: string;
+  type: "year" | "day" | "month";
 };
 
-const DatePicker = ({ date }: DatePicker) => {
+const DatePicker = ({ date, type }: DatePicker) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   useEffect(() => {
     if (date) {
@@ -34,6 +35,8 @@ const DatePicker = ({ date }: DatePicker) => {
         className="bg-[#ffffff] dark:bg-[#334155] outline-none cursor-pointer w-full"
         dateFormat={"dd/MM/yyyy"}
         showPopperArrow={false}
+        showYearPicker={type === "year" ? true : false}
+        showMonthYearPicker={type === "month" ? true : false}
       />
     </div>
   );

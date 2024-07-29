@@ -1,5 +1,5 @@
 "use client";
-import DatePicker from "./DatePicker";
+import DatePicker from "../common/DatePicker";
 import {
   addNewTransaction,
   updateTransactionAction,
@@ -76,7 +76,10 @@ const TransactionForm = ({
         <TransactionCategoryDropDown category={transactionData?.category} />
         <div className="mb-4 flex flex-col">
           <label>Transaction Date</label>
-          <DatePicker date={transactionData?.date && transactionData.date} />
+          <DatePicker
+            date={transactionData?.date && transactionData.date}
+            type="day"
+          />
         </div>
         {id && <input type="hidden" value={id} name="id" />}
         <div className="w-full flex justify-end mt-10">
