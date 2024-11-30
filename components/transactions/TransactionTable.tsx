@@ -9,7 +9,7 @@ const TransactionTable = async () => {
     <div className="mt-5 overflow-hidden overflow-x-scroll sm:overflow-auto">
       <table className="w-full">
         <TransactionTableHeader />
-        <TransactionTableRow tableData={tableData!} />
+        {tableData && <TransactionTableRow tableData={tableData} />}
       </table>
     </div>
   );
