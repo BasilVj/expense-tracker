@@ -6,6 +6,13 @@ import { Providers } from "./providers";
 import MobileSidebar from "@/components/layout/sidebar/MobileSidebar";
 import OffCanvasContextProvider from "@/context/OffCanvasContextProvider";
 import { Toaster } from "react-hot-toast";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "Hermestrack",
@@ -18,21 +25,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body data-sidebar="false">
-        <OffCanvasContextProvider>
-          <Providers>
-            <div className="sm:block hidden">
-              <Sidebar />
-            </div>
-            <div className="sm:hidden block">
-              <MobileSidebar />
-            </div>
-            {children}
-            <Toaster position="bottom-right" />
-          </Providers>
-        </OffCanvasContextProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body data-sidebar="false">
+          <OffCanvasContextProvider>
+            <Providers>
+              {/* <div className="sm:block hidden">
+                <Sidebar />
+              </div>
+              <div className="sm:hidden block">
+                <MobileSidebar />
+              </div> */}
+              {children}
+              <Toaster position="bottom-right" />
+            </Providers>
+          </OffCanvasContextProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
