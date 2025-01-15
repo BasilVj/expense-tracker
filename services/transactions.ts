@@ -29,7 +29,7 @@ export const fetchTransactions = async () => {
     }));
     return filteredData;
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching transactions:", error);
   }
 };
 

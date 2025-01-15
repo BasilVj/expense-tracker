@@ -4,6 +4,7 @@ import {
   Transaction,
   addTransaction,
   deleteTransaction,
+  fetchTransactions,
   updateTransaction,
 } from "@/services/transactions";
 import { revalidatePath } from "next/cache";
@@ -19,13 +20,12 @@ export const addNewTransaction = async (data: FormData) => {
     date: date.toString(),
     type: type.toString(),
   };
-
   try {
     await addTransaction(transaction);
+    revalidatePath("/transactions");
   } catch (error) {
     console.log(error);
   }
-  revalidatePath("/transactions");
   redirect("/transactions");
 };
 
@@ -33,10 +33,10 @@ export const deleteTransactionAction = async (data: FormData) => {
   const { id } = Object.fromEntries(data);
   try {
     await deleteTransaction(id.toString());
+    revalidatePath("/transactions");
   } catch (error) {
     console.log(error);
   }
-  revalidatePath("/transactions");
 };
 
 export const updateTransactionAction = async (data: FormData) => {

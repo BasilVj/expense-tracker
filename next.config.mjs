@@ -3,7 +3,7 @@ const nextConfig = {
   redirects: async () => [
     {
       source: "/",
-      destination: "/transaction",
+      destination: "/transactions",
       permanent: true, // Use 301 redirect
     },
   ],
