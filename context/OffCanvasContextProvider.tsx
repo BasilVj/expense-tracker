@@ -12,6 +12,8 @@ type OffCanvasContext = {
   setTransactionCategory: React.Dispatch<React.SetStateAction<string>>;
   transactionType: string;
   setTransactionType: React.Dispatch<React.SetStateAction<string>>;
+  sortTransaction: string;
+  setSortTransaction: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const OffCanvasContext = createContext<OffCanvasContext | null>(null);
@@ -22,6 +24,7 @@ const OffCanvasContextProvider = ({
   const [toggleOffcanvas, setToggleOffcanvas] = useState(false);
   const [transactionCategory, setTransactionCategory] = useState("");
   const [transactionType, setTransactionType] = useState("all");
+  const [sortTransaction, setSortTransaction] = useState("default");
   const value = {
     toggleOffcanvas,
     setToggleOffcanvas,
@@ -29,6 +32,8 @@ const OffCanvasContextProvider = ({
     setTransactionCategory,
     transactionType,
     setTransactionType,
+    sortTransaction,
+    setSortTransaction,
   };
   return (
     <OffCanvasContext.Provider value={value}>

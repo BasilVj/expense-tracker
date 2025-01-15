@@ -1,59 +1,54 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Icon from "../common/Icon";
-import { Transaction } from "@/services/transactions";
+import { fetchTransactions, Transaction } from "@/services/transactions";
 import { BsPen } from "react-icons/bs";
 import DeleteTransaction from "./DeleteTransaction";
 import Link from "next/link";
 import { useOffCanvasContext } from "@/hooks/useOffCanvasContext";
-type TransactionTableRow = {
-  tableData: Transaction[];
-};
 
-const TransactionTableRow = ({ tableData }: TransactionTableRow) => {
-  const { transactionCategory, transactionType } = useOffCanvasContext();
-
-  const [transactionData, setTransactionData] =
-    useState<Transaction[]>(tableData);
-
-  const filterTableData = (
-    key: keyof Transaction,
-    filterProperty: string,
-    dataToBeFiltered: Transaction[]
-  ) => {
-    return dataToBeFiltered.filter((data) => data[key] === filterProperty);
-  };
-
-  const filterTableDataByTransactionType = (data: Transaction[]) => {
-    const filteredDataByType = filterTableData("type", transactionType, data);
-    setTransactionData(filteredDataByType);
-  };
+const TransactionTableRow = () => {
+  const { transactionCategory, transactionType, sortTransaction } =
+    useOffCanvasContext();
+  const [originalTransactionData, setOriginalTransactionData] = useState<
+    Transaction[]
+  >([]);
+  const [transactionData, setTransactionData] = useState<Transaction[]>([]);
 
   useEffect(() => {
+    const getTransactionsData = async () => {
+      const data = await fetchTransactions();
+      if (data && data.length > 0) {
+        setOriginalTransactionData(data);
+        setTransactionData(data);
+      }
+    };
+    getTransactionsData();
+  }, []);
+
+  useEffect(() => {
+    let filteredData = [...originalTransactionData];
+
     if (transactionType !== "all") {
-      if (transactionCategory !== "") {
-        const filteredDataByCategory = filterTableData(
-          "category",
-          transactionCategory,
-          tableData
-        );
-        filterTableDataByTransactionType(filteredDataByCategory);
-      } else {
-        filterTableDataByTransactionType(tableData);
-      }
-    } else {
-      if (transactionCategory !== "") {
-        const filteredDataByCategory = filterTableData(
-          "category",
-          transactionCategory,
-          tableData
-        );
-        setTransactionData(filteredDataByCategory);
-      } else {
-        setTransactionData(tableData);
-      }
+      filteredData = filteredData.filter(
+        (data) => data.type === transactionType
+      );
     }
-  }, [transactionCategory, transactionType]);
+
+    if (transactionCategory !== "") {
+      filteredData = filteredData.filter(
+        (data) => data.category === transactionCategory
+      );
+    }
+
+    if (sortTransaction === "lowToHigh") {
+      filteredData.sort((a, b) => a.amount - b.amount);
+    } else if (sortTransaction === "highToLow") {
+      filteredData.sort((a, b) => b.amount - a.amount);
+    }
+
+    setTransactionData(filteredData);
+  }, [transactionCategory, transactionType, sortTransaction]);
 
   return (
     <tbody className="dark:bg-[#1E293B] bg-white w-full">
@@ -86,7 +81,7 @@ const TransactionTableRow = ({ tableData }: TransactionTableRow) => {
                   iconcontainerCls="bg-[#2563EB] p-2 cursor-pointer rounded-sm"
                 />
               </Link>
-              <DeleteTransaction transactionId={data.id!} />
+              {data.id && <DeleteTransaction transactionId={data.id} />}
             </td>
           </tr>
         ))}

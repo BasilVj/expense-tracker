@@ -1,3 +1,4 @@
+import ComingSoon from "@/components/animations/ComingSoon";
 import StatisticsChart from "@/components/common/StatisticsAreaChart";
 import Wallet from "@/components/common/Wallet";
 import { statistics } from "@/data/statistics";
@@ -30,7 +31,11 @@ const page = () => {
         income={totalIncome}
         transactionsTotal={transactionsTotal}
       />
-      <StatisticsChart
+
+  
+      <ComingSoon />
+
+      {/*  <StatisticsChart
         chartBgColor="#209152"
         chartData={incomeData}
         title="Income"
@@ -39,7 +44,7 @@ const page = () => {
         chartBgColor="#a93b41"
         chartData={expenseData}
         title="Expense"
-      />
+      /> */}
     </div>
   );
 };

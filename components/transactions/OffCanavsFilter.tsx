@@ -12,7 +12,7 @@ const OffCanavsFilter = () => {
     setTransactionCategory,
     transactionCategory,
     setTransactionType,
-    transactionType,
+    setSortTransaction
   } = useOffCanvasContext();
 
   return (
@@ -55,6 +55,7 @@ const OffCanavsFilter = () => {
             id=""
             className="bg-[#e9e9ed] dark:bg-[#334155] ps-2 py-2 text-sm mt-2 border border-[#e9e9ed] dark:border-[#4b5563]
             focus:outline-none focus:border-[#2563eb] focus:border-2 rounded"
+            onChange={(e) => setSortTransaction(e.target.value)}
           >
             <option value="default">Default</option>
             <option value="lowToHigh">Amount Low to High</option>
