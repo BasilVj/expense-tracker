@@ -24,7 +24,7 @@ const TransactionTableRow = () => {
       }
     };
     getTransactionsData();
-  }, []);
+  }, [transactionData]);
 
   useEffect(() => {
     let filteredData = [...originalTransactionData];
