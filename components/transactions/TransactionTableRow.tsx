@@ -21,6 +21,9 @@ const TransactionTableRow = () => {
       if (data && data.length > 0) {
         setOriginalTransactionData(data);
         setTransactionData(data);
+      } else {
+        setOriginalTransactionData([]);
+        setTransactionData([]);
       }
     };
     getTransactionsData();
