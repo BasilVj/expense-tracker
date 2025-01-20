@@ -11,7 +11,8 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 export const addNewTransaction = async (data: FormData) => {
-  const { title, amount, type, category, date } = Object.fromEntries(data);
+  const { title, amount, type, category, date, userId } =
+    Object.fromEntries(data);
 
   const transaction: Transaction = {
     title: title.toString(),
@@ -19,6 +20,7 @@ export const addNewTransaction = async (data: FormData) => {
     category: category.toString(),
     date: date.toString(),
     type: type.toString(),
+    userId: userId.toString(),
   };
   try {
     await addTransaction(transaction);

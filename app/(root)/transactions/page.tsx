@@ -5,12 +5,18 @@ import SearchBar from "@/components/transactions/SearchBar";
 import TransactionTable from "@/components/transactions/TransactionTable";
 import TransactionTableActionBtns from "@/components/transactions/TransactionTableActionBtns";
 import { fetchTransactions } from "@/services/transactions";
-
-export const dynamic = "force-dynamic";
+import { currentUser } from "@clerk/nextjs/server";
 
 const page = async () => {
+  const user = await currentUser();
+
   const tableData = await fetchTransactions();
-  const isTableDataAvailable = Array.isArray(tableData) && tableData.length > 0;
+  const filteredTableDataByUserId = tableData?.filter(
+    (data) => data.userId === user?.id
+  );
+  const isTableDataAvailable =
+    Array.isArray(filteredTableDataByUserId) &&
+    filteredTableDataByUserId.length > 0;
 
   return (
     <div className="page__wrapper max-w-full ">
@@ -24,7 +30,7 @@ const page = async () => {
         <TransactionTableActionBtns disabled={isTableDataAvailable} />
       </div>
       {isTableDataAvailable ? (
-        <TransactionTable tableData={tableData} />
+        <TransactionTable tableData={filteredTableDataByUserId} />
       ) : (
         <div className="flex justify-center items-center h-[35vh]">
           <h1 className="text-lg ">

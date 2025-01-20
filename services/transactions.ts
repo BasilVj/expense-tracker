@@ -16,6 +16,7 @@ export type Transaction = {
   category: string;
   type: string;
   date: string;
+  userId?: string;
 };
 
 const transactionsCollectionRef = collection(db, "transactions");
