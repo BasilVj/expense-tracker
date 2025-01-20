@@ -1,6 +1,3 @@
-"use client";
-
-import { useRouter } from "next/navigation";
 import { useFormStatus } from "react-dom";
 import { deleteTransactionAction } from "@/server-actions/actions";
 import { BsTrash } from "react-icons/bs";
@@ -25,11 +22,9 @@ function DeleteButton() {
 }
 
 const DeleteTransaction = ({ transactionId }: DeleteTransactionProps) => {
-  const router = useRouter();
 
   const handleDelete = async (formData: FormData) => {
     await deleteTransactionAction(formData);
-    router.refresh();
   };
 
   return (

@@ -7,7 +7,7 @@ import {
   fetchTransactions,
   updateTransaction,
 } from "@/services/transactions";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 export const addNewTransaction = async (data: FormData) => {
@@ -33,6 +33,7 @@ export const deleteTransactionAction = async (data: FormData) => {
   const { id } = Object.fromEntries(data);
   try {
     await deleteTransaction(id.toString());
+    await fetchTransactions();
     revalidatePath("/transactions");
   } catch (error) {
     console.log(error);

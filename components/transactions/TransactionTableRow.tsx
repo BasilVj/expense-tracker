@@ -1,36 +1,25 @@
-"use client";
+"use client"
 import React, { useEffect, useState } from "react";
 import Icon from "../common/Icon";
-import { fetchTransactions, Transaction } from "@/services/transactions";
+import { Transaction } from "@/services/transactions";
 import { BsPen } from "react-icons/bs";
 import DeleteTransaction from "./DeleteTransaction";
 import Link from "next/link";
 import { useOffCanvasContext } from "@/hooks/useOffCanvasContext";
 
-const TransactionTableRow = () => {
+type TransactionRowProps = {
+  tableData: Transaction[];
+};
+
+const TransactionTableRow = ({ tableData }: TransactionRowProps) => {
   const { transactionCategory, transactionType, sortTransaction } =
     useOffCanvasContext();
-  const [originalTransactionData, setOriginalTransactionData] = useState<
-    Transaction[]
-  >([]);
+
   const [transactionData, setTransactionData] = useState<Transaction[]>([]);
 
+  // Update transactionData when tableData or filters change
   useEffect(() => {
-    const getTransactionsData = async () => {
-      const data = await fetchTransactions();
-      if (data && data.length > 0) {
-        setOriginalTransactionData(data);
-        setTransactionData(data);
-      } else {
-        setOriginalTransactionData([]);
-        setTransactionData([]);
-      }
-    };
-    getTransactionsData();
-  }, [transactionData]);
-
-  useEffect(() => {
-    let filteredData = [...originalTransactionData];
+    let filteredData = [...tableData]; // Copy tableData to avoid mutation
 
     if (transactionType !== "all") {
       filteredData = filteredData.filter(
@@ -50,8 +39,9 @@ const TransactionTableRow = () => {
       filteredData.sort((a, b) => b.amount - a.amount);
     }
 
+    // Set the filtered data to state
     setTransactionData(filteredData);
-  }, [transactionCategory, transactionType, sortTransaction]);
+  }, [tableData, transactionCategory, transactionType, sortTransaction]);
 
   return (
     <tbody className="dark:bg-[#1E293B] bg-white w-full">
