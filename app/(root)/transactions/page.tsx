@@ -14,6 +14,21 @@ const page = async () => {
   const filteredTableDataByUserId = tableData?.filter(
     (data) => data.userId === user?.id
   );
+  const expenses = filteredTableDataByUserId?.filter(
+    (data) => data.type === "expense"
+  );
+  const totalExpense = expenses?.reduce((acc, curr) => acc + curr.amount, 0);
+
+  const income = filteredTableDataByUserId?.filter(
+    (data) => data.type === "income"
+  );
+  const totalIncome = income?.reduce((acc, curr) => acc + curr.amount, 0);
+
+  const balanceAmount =
+    (totalIncome ? totalIncome : 0) - (totalExpense ? totalExpense : 0);
+
+  const totalTransactions = filteredTableDataByUserId?.length;
+
   const isTableDataAvailable =
     Array.isArray(filteredTableDataByUserId) &&
     filteredTableDataByUserId.length > 0;
@@ -24,7 +39,12 @@ const page = async () => {
       <div>
         <h1 className="text-2xl font-bold">Transactions</h1>
       </div>
-      <Wallet balance={1} expense={1} income={1} transactionsTotal={1} />
+      <Wallet
+        balance={balanceAmount}
+        expense={totalExpense ? totalExpense : 0}
+        income={totalIncome ? totalIncome : 0}
+        transactionsTotal={totalTransactions ? totalTransactions : 0}
+      />
       <div className="flex justify-between mt-10 items-center">
         <SearchBar disabled={isTableDataAvailable} />
         <TransactionTableActionBtns disabled={isTableDataAvailable} />
