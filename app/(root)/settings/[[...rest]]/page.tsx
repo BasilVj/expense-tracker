@@ -13,9 +13,9 @@ const page = () => {
           }}
         />
         <div className="pt-4">
-          <button className="bg-red-700 p-2 rounded-md">
+          <div className="bg-red-700 p-2 rounded-md max-w-20">
             <SignOutButton />
-          </button>
+          </div>
         </div>
       </div>
     </div>

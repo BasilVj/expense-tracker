@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCF2K51ywAlhklKG5ul-5PwryGNs8hd0Jg",
-  authDomain: "hermestrack-81036.firebaseapp.com",
-  projectId: "hermestrack-81036",
-  storageBucket: "hermestrack-81036.appspot.com",
-  messagingSenderId: "855399847076",
-  appId: "1:855399847076:web:c29f0db0a86ba5a97fc231",
-  measurementId: "G-04BS4ZZC33",
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGIN_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
