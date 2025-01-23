@@ -13,6 +13,7 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
+import SearchFilterContextProvider from "@/context/SearchFilterContext";
 
 export const metadata: Metadata = {
   title: "Hermestrack",
@@ -29,16 +30,18 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <body data-sidebar="false">
           <OffCanvasContextProvider>
-            <Providers>
-              <div className="sm:block hidden">
-                <Sidebar />
-              </div>
-              <div className="sm:hidden block">
-                <MobileSidebar />
-              </div>
-              {children}
-              <Toaster position="bottom-right" />
-            </Providers>
+            <SearchFilterContextProvider>
+              <Providers>
+                <div className="sm:block hidden">
+                  <Sidebar />
+                </div>
+                <div className="sm:hidden block">
+                  <MobileSidebar />
+                </div>
+                {children}
+                <Toaster position="bottom-right" />
+              </Providers>
+            </SearchFilterContextProvider>
           </OffCanvasContextProvider>
         </body>
       </html>

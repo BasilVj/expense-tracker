@@ -5,7 +5,7 @@ type OffCanvasContextProviderProps = {
   children: React.ReactNode;
 };
 
-type OffCanvasContext = {
+type OffCanvasContextType = {
   toggleOffcanvas: boolean;
   setToggleOffcanvas: React.Dispatch<React.SetStateAction<boolean>>;
   transactionCategory: string;
@@ -16,7 +16,7 @@ type OffCanvasContext = {
   setSortTransaction: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const OffCanvasContext = createContext<OffCanvasContext | null>(null);
+export const OffCanvasContext = createContext<OffCanvasContextType | null>(null);
 
 const OffCanvasContextProvider = ({
   children,
