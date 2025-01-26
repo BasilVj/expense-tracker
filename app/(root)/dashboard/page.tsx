@@ -1,3 +1,4 @@
+import InsufficientDataCard from "@/components/common/InsufficientDataCard";
 import StatisticsChart from "@/components/common/StatisticsAreaChart";
 import Wallet from "@/components/common/Wallet";
 import { getCurrentCurrentUserTransactions } from "@/utils/transactionsUtils";
@@ -30,8 +31,10 @@ const page = async () => {
         income={totalIncome ? totalIncome : 0}
         transactionsTotal={totalTransactions ? totalTransactions : 0}
       />
-      {isTableDataAvailable && (
+      {isTableDataAvailable ? (
         <StatisticsChart transactionsData={transactions} />
+      ) : (
+        <InsufficientDataCard />
       )}
     </div>
   );

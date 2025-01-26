@@ -17,6 +17,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "../ui/chart";
+import InsufficientDataCard from "./InsufficientDataCard";
 type StatisticsChartProps = {
   transactionsData: Transaction[];
 };
@@ -153,20 +154,7 @@ const StatisticsAreaChart = ({ transactionsData }: StatisticsChartProps) => {
           </CardContent>
         </Card>
       ) : (
-        <Card
-          className="mt-4 dark:bg-[#0f172a] 
-          bg-[#f1f5f9] border border-[#E5E7EB] dark:border-[#334155]"
-        >
-          <CardHeader>
-            <CardTitle>Insufficient Data</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>
-              Charts are displayed when transactions data is available for at least two
-              months.
-            </p>
-          </CardContent>
-        </Card>
+       <InsufficientDataCard/>
       )}
     </div>
   );
