@@ -1,24 +1,23 @@
-import ComingSoon from "@/components/animations/ComingSoon";
 import StatisticsChart from "@/components/common/StatisticsAreaChart";
 import Wallet from "@/components/common/Wallet";
-import { statistics } from "@/data/statistics";
+import { getCurrentCurrentUserTransactions } from "@/utils/transactionsUtils";
 import React from "react";
 
-const page = () => {
-  const incomeData = statistics.filter(
-    (statistic) => statistic.type === "income"
-  );
-  const expenseData = statistics.filter(
-    (statistic) => statistic.type === "expense"
-  );
-  let totalIncome = 0;
-  let totalExpense = 0;
+const page = async () => {
+  const transactions = await getCurrentCurrentUserTransactions();
 
-  incomeData.map((income) => (totalIncome = income.amount + totalIncome));
-  expenseData.map((expense) => (totalExpense = expense.amount + totalExpense));
+  const isTableDataAvailable =
+    Array.isArray(transactions) && transactions.length > 0;
+  const expenses = transactions?.filter((data) => data.type === "expense");
+  const totalExpense = expenses?.reduce((acc, curr) => acc + curr.amount, 0);
 
-  const availableBalance = totalIncome - totalExpense;
-  const transactionsTotal = totalIncome + totalExpense;
+  const income = transactions?.filter((data) => data.type === "income");
+  const totalIncome = income?.reduce((acc, curr) => acc + curr.amount, 0);
+
+  const balanceAmount =
+    (totalIncome ? totalIncome : 0) - (totalExpense ? totalExpense : 0);
+
+  const totalTransactions = transactions?.length;
 
   return (
     <div className="page__wrapper">
@@ -26,25 +25,14 @@ const page = () => {
         <h1 className="text-2xl font-bold">Dashboard</h1>
       </div>
       <Wallet
-        balance={availableBalance}
-        expense={totalExpense}
-        income={totalIncome}
-        transactionsTotal={transactionsTotal}
+        balance={balanceAmount}
+        expense={totalExpense ? totalExpense : 0}
+        income={totalIncome ? totalIncome : 0}
+        transactionsTotal={totalTransactions ? totalTransactions : 0}
       />
-
-  
-      <ComingSoon />
-
-      {/*  <StatisticsChart
-        chartBgColor="#209152"
-        chartData={incomeData}
-        title="Income"
-      />
-      <StatisticsChart
-        chartBgColor="#a93b41"
-        chartData={expenseData}
-        title="Expense"
-      /> */}
+      {isTableDataAvailable && (
+        <StatisticsChart transactionsData={transactions} />
+      )}
     </div>
   );
 };

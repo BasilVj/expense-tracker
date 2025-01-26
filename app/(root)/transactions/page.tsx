@@ -4,34 +4,24 @@ import OffCanavsFilter from "@/components/transactions/OffCanavsFilter";
 import SearchBar from "@/components/transactions/SearchBar";
 import TransactionTable from "@/components/transactions/TransactionTable";
 import TransactionTableActionBtns from "@/components/transactions/TransactionTableActionBtns";
-import { fetchTransactions } from "@/services/transactions";
-import { currentUser } from "@clerk/nextjs/server";
+import { getCurrentCurrentUserTransactions } from "@/utils/transactionsUtils";
 
 const page = async () => {
-  const user = await currentUser();
+  const transactions = await getCurrentCurrentUserTransactions();
 
-  const tableData = await fetchTransactions();
-  const filteredTableDataByUserId = tableData?.filter(
-    (data) => data.userId === user?.id
-  );
-  const expenses = filteredTableDataByUserId?.filter(
-    (data) => data.type === "expense"
-  );
+  const expenses = transactions?.filter((data) => data.type === "expense");
   const totalExpense = expenses?.reduce((acc, curr) => acc + curr.amount, 0);
 
-  const income = filteredTableDataByUserId?.filter(
-    (data) => data.type === "income"
-  );
+  const income = transactions?.filter((data) => data.type === "income");
   const totalIncome = income?.reduce((acc, curr) => acc + curr.amount, 0);
 
   const balanceAmount =
     (totalIncome ? totalIncome : 0) - (totalExpense ? totalExpense : 0);
 
-  const totalTransactions = filteredTableDataByUserId?.length;
+  const totalTransactions = transactions?.length;
 
   const isTableDataAvailable =
-    Array.isArray(filteredTableDataByUserId) &&
-    filteredTableDataByUserId.length > 0;
+    Array.isArray(transactions) && transactions.length > 0;
 
   return (
     <div className="page__wrapper max-w-full ">
@@ -50,7 +40,7 @@ const page = async () => {
         <TransactionTableActionBtns disabled={isTableDataAvailable} />
       </div>
       {isTableDataAvailable ? (
-        <TransactionTable tableData={filteredTableDataByUserId} />
+        <TransactionTable tableData={transactions} />
       ) : (
         <div className="flex justify-center items-center h-[35vh]">
           <h1 className="text-lg ">
