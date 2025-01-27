@@ -1,10 +1,12 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import React from "react";
+import { useRouter } from 'next/router';
 
 const loading = () => {
   const tableHeaders = new Array(6).fill(null);
   const rows = new Array(5).fill(null);
   const cards = new Array(4).fill(null);
+  
 
   return (
     <div className="page__wrapper max-w-full mt-10">
