@@ -15,7 +15,7 @@ function DeleteButton() {
       <Icon
         iconName={BsTrash}
         iconCls="text-white"
-        iconcontainerCls="bg-[#EF4444] p-2 cursor-pointer rounded-sm"
+        iconcontainerCls={`${pending ? "bg-slate-500" : "bg-[#EF4444]"} p-2 cursor-pointer rounded-sm`}
       />
     </button>
   );
