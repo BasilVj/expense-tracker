@@ -12,7 +12,7 @@ const SearchBar = ({ disabled }: SearchBarPropsType) => {
   const { setQuery } = useSearchFilterContext();
   return (
     <div
-      className="cursor-text flex items-center gap-2 searchBar__xs-width w-[70.5%] sm:w-[274px] lg:w-[30.5%] xl:w-[21.8%] bg-[#334155] px-3 py-1 h-[43px] border border-[#6b7280] 
+      className="cursor-text flex items-center gap-2 searchBar__xs-width w-[70.5%] sm:w-[274px] lg:w-[30.5%] xl:w-[21.8%] dark:bg-[#334155] px-3 py-1 h-[43px] border border-[#6b7280] 
     focus:outline-none focus:border-[#2563eb] focus:border-2 "
     >
       <Icon iconName={BsSearch} iconCls="text-slate-500" iconcontainerCls="" />
@@ -22,7 +22,7 @@ const SearchBar = ({ disabled }: SearchBarPropsType) => {
         placeholder="search transactions by title.."
         type="text"
         disabled={!disabled}
-        className="outline-none bg-[#334155] p-1 placeholder:text-slate-500 w-full"
+        className="outline-none dark:bg-[#334155] p-1 placeholder:text-slate-500 w-full"
       />
     </div>
   );

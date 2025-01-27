@@ -8,7 +8,7 @@ import { getCurrentCurrentUserTransactions } from "@/utils/transactionsUtils";
 
 const page = async () => {
   const transactions = await getCurrentCurrentUserTransactions();
-
+  
   const expenses = transactions?.filter((data) => data.type === "expense");
   const totalExpense = expenses?.reduce((acc, curr) => acc + curr.amount, 0);
 
