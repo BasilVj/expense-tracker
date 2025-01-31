@@ -31,14 +31,29 @@ export const walletDetails = (
       totalTransactions: 0,
     };
   }
-  const expenses = transactions.filter((data) => data.type === "expense");
-  const income = transactions.filter((data) => data.type === "income");
-  const totalExpense = expenses.reduce((acc, curr) => acc + curr.amount, 0);
-  const totalIncome = income.reduce((acc, curr) => acc + curr.amount, 0);
+  const expenses = filterTransactions(transactions, "expense");
+  const income = filterTransactions(transactions, "income");
+  const totalExpense = transactionsReducer(expenses);
+  const totalIncome = transactionsReducer(income);
+
 
   const balanceAmount =
     (totalIncome ? totalIncome : 0) - (totalExpense ? totalExpense : 0);
 
   const totalTransactions = transactions?.length;
   return { totalExpense, totalIncome, balanceAmount, totalTransactions };
+};
+
+
+const transactionsReducer = (data: Transaction[]): number => {
+  const sum = data.reduce((acc, curr) => acc + curr.amount, 0);
+  return sum;
+};
+
+const filterTransactions = (
+  data: Transaction[],
+  type: "income" | "expense"
+) => {
+  const filteredData = data.filter((item) => item.type === type);
+  return filteredData;
 };
