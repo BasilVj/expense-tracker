@@ -1,4 +1,5 @@
 import { db } from "@/config/firebase";
+import { Transaction } from "@/types/transactions";
 import {
   addDoc,
   collection,
@@ -9,15 +10,6 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-export type Transaction = {
-  title: string;
-  id?: string;
-  amount: number;
-  category: string;
-  type: string;
-  date: string;
-  userId?: string;
-};
 
 const transactionsCollectionRef = collection(db, "transactions");
 

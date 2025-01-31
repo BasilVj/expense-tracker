@@ -4,7 +4,7 @@ import {
   updateTransactionAction,
 } from "@/server-actions/actions";
 import TransactionCategoryDropDown from "./TransactionCategoryDropDown";
-import { Transaction } from "@/services/transactions";
+import { Transaction } from "@/types/transactions";
 import { currentUser } from "@clerk/nextjs/server";
 import TransactionFormBtn from "../layout/TransactionFormBtn";
 
@@ -73,10 +73,12 @@ const TransactionForm = async ({
             <TransactionCategoryDropDown category={transactionData?.category} />
             <div className="mb-4 flex flex-col">
               <label>Transaction Date</label>
-              <DatePicker
-                date={transactionData?.date && transactionData.date}
-                type="day"
-              />
+              <div className="w-[137px]">
+                <DatePicker
+                  date={transactionData?.date && transactionData.date}
+                  type="day"
+                />
+              </div>
             </div>
             {id && <input type="hidden" value={id} name="id" />}
             <input type="hidden" value={user?.id} name="userId" />

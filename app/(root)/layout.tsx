@@ -14,6 +14,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import SearchFilterContextProvider from "@/context/SearchFilterContext";
+import DatePickerContextProvider from "@/context/DatePickerContext";
 
 export const metadata: Metadata = {
   title: "Hermestrack",
@@ -30,18 +31,20 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <body data-sidebar="false">
           <OffCanvasContextProvider>
-            <SearchFilterContextProvider>
-              <Providers>
-                <div className="sm:block hidden">
-                  <Sidebar />
-                </div>
-                <div className="sm:hidden block">
-                  <MobileSidebar />
-                </div>
-                {children}
-                <Toaster position="bottom-right" />
-              </Providers>
-            </SearchFilterContextProvider>
+            <DatePickerContextProvider>
+              <SearchFilterContextProvider>
+                <Providers>
+                  <div className="sm:block hidden">
+                    <Sidebar />
+                  </div>
+                  <div className="sm:hidden block">
+                    <MobileSidebar />
+                  </div>
+                  {children}
+                  <Toaster position="bottom-right" />
+                </Providers>
+              </SearchFilterContextProvider>
+            </DatePickerContextProvider>
           </OffCanvasContextProvider>
         </body>
       </html>

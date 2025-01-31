@@ -1,3 +1,4 @@
+import DatePicker from "@/components/common/DatePicker";
 import InsufficientDataCard from "@/components/common/InsufficientDataCard";
 import StatisticsChart from "@/components/common/StatisticsAreaChart";
 import Wallet from "@/components/common/Wallet";
@@ -22,8 +23,11 @@ const page = async () => {
 
   return (
     <div className="page__wrapper">
-      <div>
+      <div className="flex justify-between items-center pe-3">
         <h1 className="text-2xl font-bold">Dashboard</h1>
+        <div className="w-[100px]">
+          <DatePicker type="year" />
+        </div>
       </div>
       <Wallet
         balance={balanceAmount}

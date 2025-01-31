@@ -6,6 +6,7 @@
   body {
     @apply dark:bg-[#0f172a] 
           bg-[#f1f5f9];
+    @apply overflow-x-hidden
   }
 }
 

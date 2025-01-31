@@ -1,8 +1,8 @@
 "use client";
 
-import { Chart } from "@/services/chart";
+import { Chart } from "@/types/chart";
 import { Transaction } from "@/types/transactions";
-import { findMonthAndYearFromDate } from "@/utils/dateUtils";
+import { findMonthAndYearFromDate, findYearFromDate } from "@/utils/dateUtils";
 import {
   Card,
   CardContent,
@@ -18,12 +18,16 @@ import {
   ChartTooltipContent,
 } from "../ui/chart";
 import InsufficientDataCard from "./InsufficientDataCard";
+import useDatePickerContext from "@/hooks/useDatePickerContext";
 type StatisticsChartProps = {
   transactionsData: Transaction[];
 };
 
 const StatisticsAreaChart = ({ transactionsData }: StatisticsChartProps) => {
   const transactionsChartData: Chart[] = [];
+
+  const { year } = useDatePickerContext();
+  const selectedYear = findYearFromDate(year);
 
   transactionsData.forEach((data) => {
     const { month, year } = findMonthAndYearFromDate(data.date);
@@ -38,16 +42,17 @@ const StatisticsAreaChart = ({ transactionsData }: StatisticsChartProps) => {
 
   const reducedDataTransactionChartData = transactionsChartData.reduce<Chart[]>(
     (acc, current) => {
-      const existing = acc.find(
-        (item) => item.month === current.month && item.year === current.year
-      );
-      if (existing) {
-        existing.income += current.income;
-        existing.expense += current.expense;
-      } else {
-        acc.push({ ...current });
+      if (current.year === selectedYear) {
+        const existing = acc.find(
+          (item) => item.month === current.month && item.year === current.year
+        );
+        if (existing) {
+          existing.income += current.income;
+          existing.expense += current.expense;
+        } else {
+          acc.push({ ...current });
+        }
       }
-
       return acc;
     },
     []
@@ -58,7 +63,6 @@ const StatisticsAreaChart = ({ transactionsData }: StatisticsChartProps) => {
     const monthB = new Date(`${b.year}-${b.month}-01`).getMonth(); // Same for the other entry
     return monthA - monthB; // Sort in ascending order
   });
-
 
   const chartConfig = {
     income: {
@@ -79,7 +83,7 @@ const StatisticsAreaChart = ({ transactionsData }: StatisticsChartProps) => {
           bg-[#f1f5f9] border border-[#E5E7EB] dark:border-[#334155]"
         >
           <CardHeader>
-            <CardTitle>Income and Expenses Chart - 2025</CardTitle>
+            <CardTitle>Income and Expenses Chart - {selectedYear}</CardTitle>
             <CardDescription>
               A clear view of your income and expenses throughout the year in a
               single chart
@@ -154,7 +158,7 @@ const StatisticsAreaChart = ({ transactionsData }: StatisticsChartProps) => {
           </CardContent>
         </Card>
       ) : (
-       <InsufficientDataCard/>
+        <InsufficientDataCard />
       )}
     </div>
   );
