@@ -2,7 +2,10 @@ import DatePicker from "@/components/common/DatePicker";
 import InsufficientDataCard from "@/components/common/InsufficientDataCard";
 import StatisticsChart from "@/components/common/StatisticsAreaChart";
 import Wallet from "@/components/common/Wallet";
-import { getCurrentCurrentUserTransactions } from "@/utils/transactionsUtils";
+import {
+  getCurrentCurrentUserTransactions,
+  walletDetails,
+} from "@/utils/transactionsUtils";
 import React from "react";
 
 const page = async () => {
@@ -10,16 +13,8 @@ const page = async () => {
 
   const isTableDataAvailable =
     Array.isArray(transactions) && transactions.length > 0;
-  const expenses = transactions?.filter((data) => data.type === "expense");
-  const totalExpense = expenses?.reduce((acc, curr) => acc + curr.amount, 0);
-
-  const income = transactions?.filter((data) => data.type === "income");
-  const totalIncome = income?.reduce((acc, curr) => acc + curr.amount, 0);
-
-  const balanceAmount =
-    (totalIncome ? totalIncome : 0) - (totalExpense ? totalExpense : 0);
-
-  const totalTransactions = transactions?.length;
+  const { balanceAmount, totalExpense, totalIncome, totalTransactions } =
+    walletDetails(transactions);
 
   return (
     <div className="page__wrapper">
@@ -31,9 +26,9 @@ const page = async () => {
       </div>
       <Wallet
         balance={balanceAmount}
-        expense={totalExpense ? totalExpense : 0}
-        income={totalIncome ? totalIncome : 0}
-        transactionsTotal={totalTransactions ? totalTransactions : 0}
+        expense={totalExpense}
+        income={totalIncome}
+        transactionsTotal={totalTransactions}
       />
       {isTableDataAvailable ? (
         <StatisticsChart transactionsData={transactions} />

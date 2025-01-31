@@ -4,21 +4,16 @@ import OffCanavsFilter from "@/components/transactions/OffCanavsFilter";
 import SearchBar from "@/components/transactions/SearchBar";
 import TransactionTable from "@/components/transactions/TransactionTable";
 import TransactionTableActionBtns from "@/components/transactions/TransactionTableActionBtns";
-import { getCurrentCurrentUserTransactions } from "@/utils/transactionsUtils";
+import {
+  getCurrentCurrentUserTransactions,
+  walletDetails,
+} from "@/utils/transactionsUtils";
 
 const page = async () => {
   const transactions = await getCurrentCurrentUserTransactions();
-  
-  const expenses = transactions?.filter((data) => data.type === "expense");
-  const totalExpense = expenses?.reduce((acc, curr) => acc + curr.amount, 0);
 
-  const income = transactions?.filter((data) => data.type === "income");
-  const totalIncome = income?.reduce((acc, curr) => acc + curr.amount, 0);
-
-  const balanceAmount =
-    (totalIncome ? totalIncome : 0) - (totalExpense ? totalExpense : 0);
-
-  const totalTransactions = transactions?.length;
+  const { balanceAmount, totalExpense, totalIncome, totalTransactions } =
+    walletDetails(transactions);
 
   const isTableDataAvailable =
     Array.isArray(transactions) && transactions.length > 0;
@@ -31,9 +26,9 @@ const page = async () => {
       </div>
       <Wallet
         balance={balanceAmount}
-        expense={totalExpense ? totalExpense : 0}
-        income={totalIncome ? totalIncome : 0}
-        transactionsTotal={totalTransactions ? totalTransactions : 0}
+        expense={totalExpense}
+        income={totalIncome}
+        transactionsTotal={totalTransactions}
       />
       <div className="flex justify-between mt-10 items-center">
         <SearchBar disabled={isTableDataAvailable} />
