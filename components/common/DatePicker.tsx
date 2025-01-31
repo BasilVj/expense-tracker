@@ -11,12 +11,15 @@ type DatePicker = {
 };
 
 const DatePicker = ({ date, type }: DatePicker) => {
+  const { setYear, year } = useDatePickerContext();
   const [selectedDate, setSelectedDate] = useState(
-    date ? parse(date, "dd/MM/yyyy", new Date()) : new Date()
+    type === "year"
+      ? year
+      : date
+      ? parse(date, "dd/MM/yyyy", new Date())
+      : new Date()
   );
   const popperPlacement = type === "year" ? "left-start" : "top";
-
-  const { setYear } = useDatePickerContext();
 
   const handleDateChange = (date: Date) => {
     setSelectedDate(date);
