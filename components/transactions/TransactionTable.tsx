@@ -1,7 +1,7 @@
 import React from "react";
 import TransactionTableHeader from "./TransactionTableHeader";
 import TransactionTableRow from "./TransactionTableRow";
-import { Transaction } from "@/services/transactions";
+import { Transaction } from "@/types/transactions";
 
 type TransactionTableProps = {
   tableData: Transaction[];
