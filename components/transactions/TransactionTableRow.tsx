@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 import Icon from "../common/Icon";
-import { Transaction } from "@/services/transactions";
 import { BsPen } from "react-icons/bs";
 import DeleteTransaction from "./DeleteTransaction";
 import Link from "next/link";
 import { useOffCanvasContext } from "@/hooks/useOffCanvasContext";
 import useSearchFilterContext from "@/hooks/useSearchFilterContext";
+import { Transaction } from "@/types/transactions";
 
 type TransactionRowProps = {
   tableData: Transaction[];
