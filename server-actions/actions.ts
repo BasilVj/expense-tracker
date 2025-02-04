@@ -1,12 +1,12 @@
 "use server";
 
 import {
-  Transaction,
   addTransaction,
   deleteTransaction,
   fetchTransactions,
   updateTransaction,
 } from "@/services/transactions";
+import { Transaction } from "@/types/transactions";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
